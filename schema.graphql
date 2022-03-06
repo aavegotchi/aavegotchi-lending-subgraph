@@ -1,6 +1,26 @@
-type ExampleEntity @entity {
+type LendingListing @entity {
   id: ID!
-  count: BigInt!
-  rentalId: BigInt! # uint256
-  originalOwner: Bytes! # address
+  owner: Bytes!
+  gotchi: BigInt!
+  initialCost: BigInt!
+  period: BigInt!
+  time: BigInt!
+  splitOwner: BigInt!
+  splitBorrower: BigInt!
+  splitOther: BigInt!
+  tokenBalances: [RevenueTokenBalance!]! @derivedFrom(field: "listing")
+  cancelled: Boolean!
+  finished: Boolean!
+}
+
+type RevenueTokenBalance @entity {
+  id: ID!
+  token: RevenueToken!
+  listing: LendingListing!
+  balance: BigInt!
+}
+
+type RevenueToken @entity {
+  id: ID!
+  name: String!
 }
