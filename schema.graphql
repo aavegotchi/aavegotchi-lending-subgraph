@@ -1,0 +1,6 @@
+type ExampleEntity @entity {
+  id: ID!
+  count: BigInt!
+  rentalId: BigInt! # uint256
+  originalOwner: Bytes! # address
+}

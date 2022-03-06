@@ -1,0 +1,26 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: AavegotchiLendingFacet
+    network: matic
+    source:
+      address: "0x86935F11C86623deC8a25696E1C19a8659CbF95d"
+      abi: AavegotchiLendingFacet
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.2
+      language: wasm/assemblyscript
+      entities:
+        - AavegotchiRentalAdd
+        - ERC721ExecutedRental
+      abis:
+        - name: AavegotchiLendingFacet
+          file: ./abis/AavegotchiLendingFacet.json
+      eventHandlers:
+        - event: AavegotchiRentalAdd(indexed uint256,indexed address,uint256,uint256,uint256,uint256)
+          handler: handleAavegotchiRentalAdd
+        - event: ERC721ExecutedRental(indexed uint256,indexed address,address,uint256,uint256,uint256,uint256)
+          handler: handleERC721ExecutedRental
+      file: ./src/mapping.ts
