@@ -1,6 +1,8 @@
 type LendingListing @entity {
   id: ID!
   owner: Bytes!
+  borrower: Bytes
+
   gotchi: BigInt!
   initialCost: BigInt!
   period: BigInt!
@@ -8,19 +10,18 @@ type LendingListing @entity {
   splitOwner: BigInt!
   splitBorrower: BigInt!
   splitOther: BigInt!
-  tokenBalances: [RevenueTokenBalance!]! @derivedFrom(field: "listing")
+
+  fudActive: Boolean!
+  fudBalance: BigInt!
+  fomoActive: Boolean!
+  fomoBalance: BigInt!
+  alphaActive: Boolean!
+  alphaBalance: BigInt!
+  kekActive: Boolean!
+  kekBalance: BigInt!
+  ghstActive: Boolean!
+  ghstBalance: BigInt!
+
   cancelled: Boolean!
   finished: Boolean!
-}
-
-type RevenueTokenBalance @entity {
-  id: ID!
-  token: RevenueToken!
-  listing: LendingListing!
-  balance: BigInt!
-}
-
-type RevenueToken @entity {
-  id: ID!
-  name: String!
 }
