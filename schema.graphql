@@ -23,5 +23,5 @@ type LendingListing @entity {
   ghstBalance: BigInt!
 
   cancelled: Boolean!
-  finished: Boolean!
+  completed: Boolean!
 }

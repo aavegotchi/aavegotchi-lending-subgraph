@@ -18,17 +18,11 @@ dataSources:
       abis:
         - name: AavegotchiLendingFacet
           file: ./abis/AavegotchiLendingFacet.json
-      callHandlers:
-        - function: addAavegotchiRental(uint256,uint256,uint256,uint256[3],address,uint256,address[])
-          handler: handleAddAavegotchiRental
-        - function: agreeAavegotchiRental(uint256,uint256,uint256,uint256,uint256[3])
-          handler: handleAgreeAavegotchiRental
-        - function: cancelAavegotchiRental(uint256)
-          handler: handleCancelAavegotchiRental
-        - function: cancelAavegotchiRentalByToken(uint256)
-          handler: handleCancelAavegotchiRentalByToken
-        - function: claimAavegotchiRental(uint256,address[])
-          handler: handleClaimAavegotchiRental
-        - function: claimAndEndAavegotchiRental(uint256,address[])
-          handler: handleClaimAndEndAavegotchiRental
+      eventHandlers:
+        - event: AavegotchiRentalAdd(indexed uint256,indexed address,uint256,uint256,uint256,uint256)
+          handler: handleAavegotchiRentalAdd
+        - event: ERC721ExecutedRental(indexed uint256,indexed address,address,uint256,uint256,uint256,uint256)
+          handler: handleERC721ExecutedRental
+        - event: AavegotchiRentalCanceled(indexed uint256,uint256)
+          handler: handleAavegotchiRentalCanceled
       file: ./src/mapping.ts
