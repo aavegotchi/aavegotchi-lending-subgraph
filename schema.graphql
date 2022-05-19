@@ -1,27 +1,52 @@
-type LendingListing @entity {
+### lending
+type GotchiLending @entity {
   id: ID!
-  owner: Bytes!
-  borrower: Bytes
-
-  gotchi: BigInt!
-  initialCost: BigInt!
+  rentDuration: BigInt!
+  upfrontCost: BigInt!
   period: BigInt!
-  time: BigInt!
-  splitOwner: BigInt!
-  splitBorrower: BigInt!
-  splitOther: BigInt!
 
-  fudActive: Boolean!
-  fudBalance: BigInt!
-  fomoActive: Boolean!
-  fomoBalance: BigInt!
-  alphaActive: Boolean!
-  alphaBalance: BigInt!
-  kekActive: Boolean!
-  kekBalance: BigInt!
-  ghstActive: Boolean!
-  ghstBalance: BigInt!
+  # gotch filter attributes
+  gotchiBRS: BigInt
+  gotchiTokenId: BigInt!
+  gotchiKinship: BigInt!
+
+  # profit split
+  splitOwner: BigInt
+  splitBorrower: BigInt
+  splitOther: BigInt
+
+  # tokens to share
+  tokensToShare: [Bytes!]!
+
+  whitelist: Whitelist
+  whitelistMembers: [Bytes!]!
+  whitelistId: BigInt
+  thirdPartyAddress: Bytes
+
+  borrower: Bytes
+  lender: Bytes
+  originalOwner: Bytes
 
   cancelled: Boolean!
   completed: Boolean!
+  lastClaimed: BigInt
+
+  timeAgreed: BigInt
+  timeCreated: BigInt
+
+  claimed: [ClaimedToken!]! @derivedFrom(field: "lending")
+}
+
+type ClaimedToken @entity {
+  id: ID!
+  lending: GotchiLending!
+  token: Bytes!
+  amount: BigInt!
+}
+
+type Whitelist @entity {
+  id: ID!
+  name: String!
+  members: [Bytes!]!
+  ownerAddress: Bytes!
 }

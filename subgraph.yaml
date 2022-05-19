@@ -10,19 +10,26 @@ dataSources:
       abi: AavegotchiLendingFacet
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
-        - AavegotchiRentalAdd
-        - ERC721ExecutedRental
+        - GotchiLending
       abis:
         - name: AavegotchiLendingFacet
           file: ./abis/AavegotchiLendingFacet.json
       eventHandlers:
-        - event: AavegotchiRentalAdd(indexed uint256,indexed address,uint256,uint256,uint256,uint256)
-          handler: handleAavegotchiRentalAdd
-        - event: ERC721ExecutedRental(indexed uint256,indexed address,address,uint256,uint256,uint256,uint256)
-          handler: handleERC721ExecutedRental
-        - event: AavegotchiRentalCanceled(indexed uint256,uint256)
-          handler: handleAavegotchiRentalCanceled
+        - event: WhitelistCreated(indexed uint32)
+          handler: handleWhitelistCreated
+        - event: WhitelistUpdated(indexed uint32)
+          handler: handleWhitelistUpdated
+        - event: GotchiLendingAdd(indexed uint32)
+          handler: handleGotchiLendingAdd
+        - event: GotchiLendingClaim(indexed uint32,address[],uint256[])
+          handler: handleGotchiLendingClaim
+        - event: GotchiLendingEnd(indexed uint32)
+          handler: handleGotchiLendingEnd
+        - event: GotchiLendingExecute(indexed uint32)
+          handler: handleGotchiLendingExecute
+        - event: GotchiLendingCancel(indexed uint32,uint256)
+          handler: handleGotchiLendingCancel
       file: ./src/mapping.ts
