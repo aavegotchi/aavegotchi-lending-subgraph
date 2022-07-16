@@ -6,9 +6,7 @@ type GotchiLending @entity {
   period: BigInt!
 
   # gotch filter attributes
-  gotchiBRS: BigInt
   gotchiTokenId: BigInt!
-  gotchiKinship: BigInt!
 
   # profit split
   splitOwner: BigInt
